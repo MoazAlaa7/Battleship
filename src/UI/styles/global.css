@@ -1,0 +1,60 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+body {
+  background: url(../../assets/images/worldMap.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  font-family: "system-ui", "Merriweather", "Times New Roman", Times, serif;
+  position: relative;
+}
+
+#app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 18px;
+  color: white;
+  background-color: transparent;
+  border: none;
+  border: 1px solid white;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.3s ease-out;
+  &:hover:not(.disabled) {
+    color: black;
+    background-color: white;
+  }
+}

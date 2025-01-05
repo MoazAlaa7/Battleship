@@ -1,0 +1,139 @@
+#app.setup {
+  padding: 10px;
+}
+
+.setup-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setup-wrapper > * {
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.header {
+  color: #39a8e0;
+}
+
+.setup-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.axis-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-radius: 10px;
+}
+
+.axis-btn {
+  border-radius: 10px;
+  width: 40%;
+}
+
+.axis-btn.active {
+  color: black;
+  background-color: white;
+}
+
+.board-fleet-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.board-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.cell {
+  position: relative;
+  color: white;
+  width: 60px;
+  height: 60px;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+.cell:hover {
+  background-color: #1c538e9e;
+}
+
+.cell.available {
+  background-color: #1c538e9e;
+}
+
+.cell.occupied {
+  background-color: #5f09099e;
+}
+
+.fleet-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ship-card {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  min-height: 100px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background-color: black;
+  text-align: center;
+  cursor: grab;
+  transition: 0.3s ease-out;
+  &:focus,
+  &:active {
+    filter: invert(100%);
+  }
+}
+
+.ship-img {
+  height: 40px;
+}
+
+.flashing-animation {
+  animation: flashing 3s infinite linear;
+  animation-delay: 0s;
+}
+
+@keyframes flashing {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.confirm-container {
+  text-align: center;
+}
+
+.confirm-btn {
+  border-radius: 10px;
+}
+
+.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

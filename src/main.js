@@ -1,4 +1,4 @@
-import GameController from "./factory/game.js";
+import "./UI/styles/global.css";
+import { loadStartMenu } from "./UI/modules/startMenu.js";
 
-const game = new GameController();
-game.startGame();
+document.addEventListener("DOMContentLoaded", loadStartMenu);
