@@ -27,7 +27,13 @@ function loadStartMenu() {
   });
   startMenu.appendChild(startBtn);
 
+  const githubBtn = createElement("a", ["github-btn"], "GITHUB", {
+    href: "https://github.com/MoazAlaa7/Battleship",
+    target: "_blank",
+  });
+
   appCont.appendChild(startMenu);
+  appCont.appendChild(githubBtn);
 }
 
 export { loadStartMenu, captainName };
