@@ -27,6 +27,12 @@ function loadStartMenu() {
   });
   startMenu.appendChild(startBtn);
 
+  const infoBtn = createElement("a", ["info-btn"], "?", {
+    href: "https://en.wikipedia.org/wiki/Battleship_(game)",
+    target: "_blank",
+  });
+  startMenu.appendChild(infoBtn);
+
   const githubBtn = createElement("a", ["github-btn"], "GITHUB", {
     href: "https://github.com/MoazAlaa7/Battleship",
     target: "_blank",
