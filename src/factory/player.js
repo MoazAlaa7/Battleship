@@ -15,23 +15,28 @@ class Player {
     }
 
     this.gameboard.board[row][col] = "H";
-    this.updateShipStatus(row, col);
-    return true;
+
+    const sunkShip = this.updateShipStatus(row, col);
+    return sunkShip || true;
   }
 
   updateShipStatus(row, col) {
+    let sunkShip = null;
+
     this.ships.forEach((ship) => {
       ship.cellsOccupied.some((cell) => {
         if (cell[0] === row && cell[1] === col) {
           ship.hits++;
           if (ship.hits === ship.length) {
             ship.isSunk = true;
+            sunkShip = ship;
           }
           return true;
         }
       });
-      return false;
     });
+
+    return sunkShip;
   }
 
   isLoser() {

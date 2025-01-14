@@ -9,6 +9,20 @@ import GameController from "../../factory/game";
 import { generateRandNum } from "../../factory/utils";
 import { createElement } from "./utils.js";
 
+import destroyerImg from "../../assets/images/destroyer.svg";
+import battleshipImg from "../../assets/images/battleship.svg";
+import carrierImg from "../../assets/images/carrier.svg";
+import cruiserImg from "../../assets/images/cruiser.svg";
+import submarineImg from "../../assets/images/submarine.svg";
+
+const FLEET = [
+  { image: destroyerImg, name: "Destroyer", length: 2 },
+  { image: battleshipImg, name: "Battleship", length: 4 },
+  { image: carrierImg, name: "Carrier", length: 5 },
+  { image: cruiserImg, name: "Cruiser", length: 3 },
+  { image: submarineImg, name: "Submarine", length: 3 },
+];
+
 let gameController = null;
 
 const resultModal = createElement("dialog", ["result-modal"]);
@@ -18,6 +32,7 @@ function loadBattlePage() {
   if (!gameController) {
     gameController = new GameController(player, computer);
   }
+  computer.gameboard.display();
 
   const appCont = document.querySelector("#app");
   appCont.classList.remove("setup");
@@ -67,6 +82,59 @@ function handlePlayerTurn(event) {
 
     const isShotHit = computer.receiveShotAt(targetRow, targetCol);
     gameController.isGameOver = computer.isLoser();
+
+    // 'receiveShotAt()' function returned a sunkShip
+    if (typeof isShotHit === "object") {
+      let shipImgSrc = "";
+      FLEET.forEach((ship) => {
+        if (ship.name === isShotHit.name) shipImgSrc = ship.image;
+      });
+
+      const sunkShipImg = createElement("img", ["flashing-animation"], "", {
+        src: shipImgSrc,
+      });
+
+      const axis =
+        isShotHit.cellsOccupied[0][0] === isShotHit.cellsOccupied[1][0]
+          ? "X"
+          : "Y";
+
+      let imgStartPos = 10;
+      if (axis === "X") {
+        isShotHit.cellsOccupied.forEach((cell) => {
+          if (cell[1] < imgStartPos) imgStartPos = cell[1];
+        });
+      } else {
+        isShotHit.cellsOccupied.forEach((cell) => {
+          if (cell[0] < imgStartPos) imgStartPos = cell[0];
+        });
+      }
+
+      let startCell;
+      if (axis === "X") {
+        startCell = computerBoard.querySelector(
+          `[data-row="${target.dataset.row}"][data-col="${imgStartPos}"]`
+        );
+
+        sunkShipImg.style.width = `${
+          startCell.clientWidth * isShotHit.length
+        }px`;
+        sunkShipImg.style.height = `90%`;
+      } else {
+        startCell = computerBoard.querySelector(
+          `[data-row="${imgStartPos}"][data-col="${target.dataset.col}"]`
+        );
+
+        sunkShipImg.style.width = `${
+          startCell.clientWidth * isShotHit.length
+        }px`;
+        sunkShipImg.style.height = `80%`;
+        sunkShipImg.style.transformOrigin = "top left";
+        sunkShipImg.style.transform = `rotate(90deg) translate(0, -125%)`;
+      }
+
+      startCell.appendChild(sunkShipImg);
+    }
 
     markShot(target, isShotHit);
 

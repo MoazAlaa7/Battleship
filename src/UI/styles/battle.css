@@ -38,7 +38,14 @@
 .player-board-container img {
   position: relative;
   z-index: 1;
+}
+
+.player-board img {
   filter: invert(30%) sepia(1) saturate(2000%) hue-rotate(165deg);
+}
+
+.computer-board img {
+  filter: invert(65%) sepia(1) saturate(5000%) hue-rotate(10deg);
 }
 
 .hit-mark,
@@ -52,20 +59,14 @@
   left: 25%;
 }
 
-.hit-mark {
+.hit-mark,
+.hit-mark.computer {
   background-color: red;
 }
 
-.hit-mark.computer {
-  background-color: #ff4500;
-}
-
-.miss-mark {
-  background-color: #39a8e0;
-}
-
+.miss-mark,
 .miss-mark.computer {
-  background-color: lightgray;
+  background-color: #39a8e0;
 }
 
 .result-modal {
